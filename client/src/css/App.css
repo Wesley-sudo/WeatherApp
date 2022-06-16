@@ -1,0 +1,312 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: montserrat;
+}
+
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: hidden;
+}
+
+.navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #281a1a;
+  padding-block: 1rem;
+  padding-inline: 5rem;
+}
+
+.navbar .home-link {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.navbar .login-link {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.home {
+  background-image: url("https://www.ksn.com/wp-content/uploads/sites/13/2020/08/EFC31919-DFE1-4C07-8AE2-2B03AAF57D55.jpeg?w=4032");
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 91vh;
+}
+
+.home .card {
+  background-image: url("https://www.ksn.com/wp-content/uploads/sites/13/2020/08/EFC31919-DFE1-4C07-8AE2-2B03AAF57D55.jpeg?w=4032");
+  background-position: center;
+  background-size: cover;
+  border-radius: 2rem;
+  margin-block: 2rem;
+  padding-block: 3rem;
+  padding-inline: 6rem;
+  height: 65vh;
+  width: 60%;
+}
+
+.home .card .upper-half {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 50%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.home .card .upper-half .section1 .location-date {
+  font-size: 24px;
+}
+
+.home .card .upper-half .section1 .today-icon img {
+  height: 120px;
+}
+
+.home .card .upper-half .section2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.home .card .upper-half .section2 .temperature {
+  font-size: 60px;
+}
+
+.home .card .upper-half .section2 .conversion {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.home .card .upper-half .section2 .conversion .celc-faren {
+  font-size: 30px;
+}
+
+.home .card .upper-half .section2 .conversion .convert-temp {
+  width: 24px;
+  cursor: pointer;
+}
+
+.home .card .upper-half .section2 .conversion .convert-temp svg {
+  height: 30px;
+}
+
+.home .card .bottom-half {
+  margin-top: 2rem;
+  height: 50%;
+}
+
+.home .card .bottom-half .selection {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.home .card .bottom-half .selection .selectors {
+  margin-inline: 2rem;
+}
+
+.home .card .bottom-half .forecast {
+  margin-top: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.home .card .bottom-half .forecast .forecast-component {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: auto;
+}
+
+.home .card .bottom-half .forecast .forecast-component .date {
+  font-size: 22px;
+}
+
+.home .card .bottom-half .forecast .forecast-component .temp {
+  color: white;
+  font-size: 18px;
+}
+
+.login {
+  background-image: url("https://www.ksn.com/wp-content/uploads/sites/13/2020/08/EFC31919-DFE1-4C07-8AE2-2B03AAF57D55.jpeg?w=4032");
+  height: calc(100vh - 50px);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.login .loginTitle {
+  position: absolute;
+  color: #3d3d3d;
+  top: 150px;
+}
+
+.login .wrapper {
+  -webkit-box-shadow: 0px 5px 33px -21px #42445a;
+          box-shadow: 0px 5px 33px -21px #42445a;
+  background-color: white;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 75%;
+  width: 50%;
+}
+
+.login .wrapper .left, .login .wrapper .right {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.login .wrapper .left .loginButton, .login .wrapper .right .loginButton {
+  width: 150px;
+  padding: 15px 25px;
+  border-radius: 1rem;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.login .wrapper .left .google, .login .wrapper .right .google {
+  background-color: #df4930;
+}
+
+.login .wrapper .left .facebook, .login .wrapper .right .facebook {
+  background-color: #507cc0;
+}
+
+.login .wrapper .left .github, .login .wrapper .right .github {
+  background-color: black;
+}
+
+.login .wrapper .left .icon, .login .wrapper .right .icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.login .wrapper .left input, .login .wrapper .right input {
+  width: 200px;
+  font-size: 16px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border-radius: 1rem;
+}
+
+.login .wrapper .left .submit, .login .wrapper .right .submit {
+  margin: 0.25rem;
+  padding-block: 0.5rem;
+  padding-inline: 2rem;
+  background-color: rgba(128, 0, 128, 0.671);
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login .wrapper .center {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+}
+
+.login .wrapper .center .or {
+  border: 2px solid lightgray;
+  border-radius: 50%;
+  padding: 10px;
+  color: gray;
+  background-color: white;
+  font-weight: bold;
+  z-index: 2;
+}
+
+.login .wrapper .center .line {
+  width: 0.5px;
+  height: 60%;
+  background-color: #392c2c;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 1;
+}
+/*# sourceMappingURL=App.css.map */
