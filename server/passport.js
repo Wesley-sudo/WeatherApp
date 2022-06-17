@@ -23,21 +23,20 @@ passport.use( new GoogleStrategy({
     },
     function (accessToken, refreshToken, profile, done) {
         process.nextTick(function() {
-            User.findOne({ 'google.id' : profile.id }, function(err, user) {
+            User.findOne({ 'local.email' : profile.emails[0].value.toLowerCase() }, function(err, user) {
                 if(err) return done(err);
-                if(user) return done(null, user);
+                if(user) return done(null, user)
                 else {
                     const newUser = new User();
-                    newUser.local.email = profile.emails[0].value;
-                    newUser.local.location = "N/A";
-
                     newUser.google.id = profile.id;
                     newUser.google.token = accessToken;
-                    newUser.google.displayName = profile.displayName;
-                    newUser.google.name.familyName = profile.name.familyName;
-                    newUser.google.name.givenName = profile.name.givenName;
-                    newUser.google.email = profile.emails[0].value;
-                    newUser.google.photo = profile.photos[0].value;
+
+                    newUser.local.email = profile.emails[0].value.toLowerCase();
+                    newUser.local.displayName = profile.displayName;
+                    newUser.local.name.familyName = profile.name.familyName;
+                    newUser.local.name.givenName = profile.name.givenName;
+                    newUser.local.location = "N/A";
+                    newUser.local.photo = profile.photos[0].value;
 
                     newUser.save(function(err){
                         if(err) throw err;
@@ -54,7 +53,28 @@ passport.use( new GithubStrategy({
     callbackURL: "/auth/github/callback",
     },
     function (accessToken, refreshToken, profile, done) {
-    done(null, profile);
+        process.nextTick(function() {
+            User.findOne({ 'local.email' : profile.emails[0].value.toLowerCase() }, function(err, user) {
+                if(err) return done(err);
+                if(user) return done(null, user);
+                else {
+                    const newUser = new User();
+                    newUser.github.id = profile.id;
+                    newUser.github.token = accessToken;
+                    
+                    newUser.local.email = profile.emails[0].value.toLowerCase();
+                    newUser.local.displayName = profile.displayName;
+                    newUser.local.name.givenName = profile._json.name;                    
+                    newUser.local.photo = profile.photos[0].value;
+                    newUser.local.location = "N/A";
+
+                    newUser.save(function(err){
+                        if(err) throw err;
+                        return done(null, newUser);
+                    });
+                }
+            });
+        });
 }));
 
 passport.use( new FacebookStrategy({
@@ -63,7 +83,7 @@ passport.use( new FacebookStrategy({
     callbackURL: "/auth/facebook/callback",
     },
     function (accessToken, refreshToken, profile, done) {
-    done(null, profile);
+        done(null, profile);
 }));
 
 passport.use('local-signup', new LocalStrategy({
@@ -73,13 +93,18 @@ passport.use('local-signup', new LocalStrategy({
     },
     function(req, email, password, done){
         process.nextTick(function(){
-            User.findOne({'local.username': email}, function(err, user){
+            User.findOne({'local.email': email}, function(err, user){
+                console.log(user);
                 if(err) return done(err);
-                if(user)  return done(null, false, req.flash('signupMessage', 'That email already taken'));
+                if(user) return done(null, false, req.flash('signupMessage', 'That email already taken'));
                 if(!req.user) {
-                    var newUser = new User();
-                    newUser.local.username = email;
+                    const newUser = new User();
+                    newUser.local.email = email;
                     newUser.local.password = newUser.generateHash(password);
+                    newUser.local.displayName = req.body.displayname;
+                    newUser.local.name.givenName = req.body.name;
+                    newUser.local.name.familyName = req.body.lastname;
+                    newUser.local.location = req.body.location;
 
                     newUser.save(function(err){
                         if(err)
@@ -87,7 +112,7 @@ passport.use('local-signup', new LocalStrategy({
                         return done(null, newUser);
                     })
                 } else {
-                    var user = req.user;
+                    const user = req.user;
                     user.local.username = email;
                     user.local.password = user.generateHash(password);
 
@@ -100,3 +125,20 @@ passport.use('local-signup', new LocalStrategy({
             })
         });
 }));
+
+passport.use('local-login', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true
+},
+function(req, email, password, done){
+    process.nextTick(function(){
+        User.findOne({ 'local.email': email}, function(err, user){
+            if(err) return done(err);
+            if(!user) return done(null, false, req.flash('loginMessage', 'No User found'));
+            if(!user.validPassword(password)) return done(null, false, req.flash('loginMessage', 'invalid password'));
+            return done(null, user);
+        });
+    });
+}
+));

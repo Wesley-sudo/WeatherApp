@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import Google from "../img/google.png";
 import Github from "../img/github.png";
 import Facebook from "../img/facebook.png";
@@ -8,10 +10,10 @@ const Login = () => {
   const facebook = () => { window.open("http://localhost:3001/auth/facebook", "_self") };
 
   return (
-    <div className="login">
-      <h1 className="loginTitle">Choose a Login Method</h1>
-      <div className="wrapper">
-        <div className="left">
+    <div className="login-container">
+      <h1 className="login-title">Choose a Login Method</h1>
+      <div className="form-wrapper">
+        <div className="left-half">
           <div className="loginButton google" onClick={google}>
             <img src={Google} alt="" className="icon" />
             Google
@@ -29,11 +31,15 @@ const Login = () => {
           <div className="line"/>
           <div className="or">OR</div>
         </div>
-        <div className="right">
-          <input type="text" placeholder="Username" />
-          <input type="text" placeholder="Password" />
-          <button className="submit" >Login</button>
-          <button className="submit" >Sign Up</button>
+        <div className="right-half">
+          <form action="http://localhost:3001/auth/login" method="POST">
+            <input name="email" type="text" placeholder="Email" />
+            <input name="password" type="password" placeholder="Password" />
+            <button type="submit" className="submit" >Login</button>
+            <Link className="signup-link" to="../signup">
+              <button className="submit" >Sign Up</button>
+            </Link>
+          </form>
         </div>
       </div>
     </div>

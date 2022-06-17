@@ -12,23 +12,17 @@ const Navbar = ({ user }) => {
         </Link>
       </span>
       {user ? (
-        <ul className="list">
-          <li className="listItem">
-            <img
-              src={user.photos[0].value}
-              alt=""
-              className="avatar"
-            />
-          </li>
-          <li className="listItem">{ user.displayName }</li>
-          <li className="listItem" onClick={ logout }>
-            Logout
-          </li>
-        </ul>
+        <div className="profile">
+          <img className="avatar"src={ user.local.photo } alt=""  />
+          <div className="givenName">{ user.local.name.givenName }</div>
+          <Link className="about-link" to="about">About</Link>
+          <div className="logout" onClick={ logout }>Log out</div>
+        </div>
       ) : (
-        <Link className="login-link" to="login">
-          Login
-        </Link>
+        <div>
+          <Link className="about-link" to="about">About</Link>
+          <Link className="login-link" to="login">Login</Link> 
+        </div>
       )}
     </div>
   );
